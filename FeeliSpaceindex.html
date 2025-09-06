@@ -1,0 +1,404 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab560
+\pard\pardeftab560\slleading20\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf0 \
+<!doctype html>\
+<html lang="en">\
+<head>\
+<meta charset="utf-8" />\
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />\
+<title>FeelSpace \'97 Web App</title>\
+<link rel="preconnect" href="https://fonts.googleapis.com">\
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">\
+<style>\
+  /* ---------- App frame (phone-like) ---------- */\
+  :root\{\
+    --bg:#f1f3f8;\
+    --page-bg: #f7f8fb;\
+    --card:#ffffff;\
+    --muted:#6b7280;\
+    --text:#0b1226;\
+    --accent-1: #6c5ce7; /* purple */\
+    --accent-2: #00c6ff; /* cyan */\
+    --primary-gradient: linear-gradient(135deg,var(--accent-1),var(--accent-2));\
+    --button-bg: #5f73c9;\
+    --button-text: #ffffff;\
+    --soft-border: rgba(16,24,40,0.04);\
+  \}\
+\
+  /* center page on desktop */\
+  html,body\{height:100%;margin:0;background:linear-gradient(180deg,#eef1f8 0%,#f6f8fb 100%);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial\}\
+  .stage \{display:flex;align-items:flex-start;justify-content:center;padding:40px 20px;\}\
+  .phone \{\
+    width:390px; /* typical iPhone width */\
+    background:var(--page-bg);\
+    border-radius:18px;\
+    box-shadow: 0 10px 30px rgba(12,18,40,0.08);\
+    overflow:hidden;\
+    border:1px solid rgba(12,18,40,0.03);\
+  \}\
+\
+  /* top bar (simulating status bar) */\
+  .status \{height:44px;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted);background:transparent\}\
+  .content \{padding:18px\}\
+\
+  /* common cards */\
+  .card \{background:var(--card);border-radius:14px;padding:18px;border:1px solid var(--soft-border);box-shadow:0 6px 20px rgba(11,18,38,0.03)\}\
+  .center \{text-align:center\}\
+  h1.app-title\{font-size:20px;margin:8px 0 4px;color:var(--text);font-weight:700\}\
+  p.lead\{font-size:13px;color:var(--muted);margin:0 0 12px\}\
+\
+  /* Welcome Screen */\
+  .welcome .logo \{\
+    margin:10px auto 12px;width:108px;height:108px;border-radius:14px;display:flex;align-items:center;justify-content:center;\
+    background:linear-gradient(180deg,#fff,#f7fbff);border:1px solid rgba(0,0,0,0.04);\
+  \}\
+  .cloud-illustration\{width:76px;height:56px;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.05))\}\
+\
+  .nickname-input \{margin-top:12px\}\
+  .input \{\
+    width:100%;padding:12px;border-radius:10px;border:1px solid #e6eef8;background:#fbfdff;font-size:14px;color:var(--text)\
+  \}\
+  .btn \{\
+    width:100%;margin-top:14px;padding:12px;border-radius:12px;border:0;background:var(--button-bg);color:var(--button-text);font-weight:700;font-size:15px;cursor:pointer;\
+    box-shadow:0 8px 20px rgba(96,78,196,0.12)\
+  \}\
+\
+  /* Journal (Express Feelings) */\
+  .journal-card \{margin-top:12px\}\
+  .textarea \{width:100%;min-height:210px;padding:14px;border-radius:12px;border:1px solid #e6eef8;background:#fff;resize:none;font-size:15px;color:var(--text);line-height:1.45\}\
+  .char-row \{display:flex;justify-content:space-between;align-items:center;margin-top:8px\}\
+  .char-count \{font-size:12px;color:var(--muted)\}\
+  .save-btn \{width:100%;margin-top:14px;padding:13px;border-radius:12px;border:0;background:linear-gradient(135deg,#7983d0,#5fb8ec);color:white;font-weight:700;font-size:15px;cursor:pointer\}\
+\
+  /* Bottom nav */\
+  .bottom-nav \{position:sticky;bottom:0;display:flex;gap:8px;padding:10px 12px;background:transparent;margin-top:16px;align-items:center;justify-content:space-between\}\
+  .nav-item \{flex:1;text-align:center;padding:10px 6px;border-radius:12px;color:#68718a;font-size:13px\}\
+  .nav-item.active \{background:linear-gradient(180deg,rgba(111,104,214,0.08),rgba(0,198,255,0.03));color:var(--accent-1);font-weight:700\}\
+\
+  /* History list */\
+  .history-list\{margin-top:12px;display:flex;flex-direction:column;gap:10px\}\
+  .entry \{background:#fff;border-radius:10px;padding:12px;border:1px solid #eef3fb\}\
+  .entry .meta \{font-size:12px;color:#8b93a8;margin-bottom:6px\}\
+  .entry p \{margin:0;font-size:14px;color:var(--text);line-height:1.4\}\
+\
+  /* Streak card */\
+  .streak-big \{display:flex;align-items:center;justify-content:center;flex-direction:column;padding:22px;border-radius:12px;background:linear-gradient(180deg,#f6f8ff,#ffffff);border:1px solid #e8eefc\}\
+  .streak-number \{font-size:44px;font-weight:800;color:#465b9f\}\
+  .streak-sub \{margin-top:8px;font-size:13px;color:var(--muted)\}\
+\
+  .streak-actions \{display:flex;flex-direction:column;gap:10px;margin-top:14px\}\
+  .btn-outline \{padding:12px;border-radius:12px;border:1px solid #cfe0ff;background:transparent;font-weight:700;color:#3b5ea6;cursor:pointer\}\
+\
+  /* small helpers */\
+  .muted\{color:var(--muted)\} .row \{display:flex;gap:10px;align-items:center\}\
+  .space \{height:12px\}\
+\
+  /* Make the UI feel identical on mobile by limiting width inside phone */\
+  @media (max-width:420px)\{\
+    .phone \{width:375px\}\
+  \}\
+</style>\
+</head>\
+<body>\
+  <div class="stage">\
+    <div class="phone" role="application" aria-label="FeelSpace app">\
+      <div class="status">9:41</div>\
+      <div class="content">\
+\
+        <!-- WELCOME -->\
+        <section id="screen-welcome" class="welcome" aria-hidden="false">\
+          <div class="card center">\
+            <div class="logo" aria-hidden="true">\
+              <!-- soft cloud illustration -->\
+              <svg class="cloud-illustration" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">\
+                <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#f5f8ff"/><stop offset="1" stop-color="#e7f6ff"/></linearGradient></defs>\
+                <rect rx="12" width="120" height="80" fill="url(#g)"/>\
+                <g transform="translate(10,10)">\
+                  <ellipse cx="50" cy="36" rx="30" ry="18" fill="#fff"/>\
+                  <ellipse cx="32" cy="32" rx="18" ry="12" fill="#fff"/>\
+                  <ellipse cx="70" cy="30" rx="18" ry="12" fill="#fff"/>\
+                </g>\
+              </svg>\
+            </div>\
+            <h1 class="app-title">Welcome to Feel Space</h1>\
+            <p class="lead">Your personal journal for daily emotions and self-expression.</p>\
+\
+            <div style="margin-top:12px;text-align:left;width:100%">\
+              <label class="muted" style="font-size:12px">Your Nickname</label>\
+              <div class="nickname-input">\
+                <input id="nickname" class="input" placeholder="Enter a fun nickname" maxlength="24" />\
+              </div>\
+            </div>\
+\
+            <button id="btn-continue" class="btn">Continue</button>\
+          </div>\
+        </section>\
+\
+        <!-- JOURNAL / ENTRY -->\
+        <section id="screen-journal" style="display:none">\
+          <div style="display:flex;align-items:center;justify-content:center;margin-bottom:8px">\
+            <h1 class="app-title">Feel Space</h1>\
+          </div>\
+\
+          <div class="card journal-card">\
+            <h2 style="font-size:16px;margin:0 0 6px">How are you feeling today?</h2>\
+            <p class="muted" style="margin-bottom:12px">Take a moment to write down your thoughts and emotions.</p>\
+\
+            <textarea id="entryText" class="textarea" maxlength="500" placeholder="Today I feel..."></textarea>\
+            <div class="char-row">\
+              <div class="muted">Tip: describe why you feel this way (short reflection).</div>\
+              <div class="char-count" id="charCount">0/500</div>\
+            </div>\
+\
+            <button id="btn-save" class="save-btn" style="margin-top:12px">Save Entry</button>\
+          </div>\
+        </section>\
+\
+        <!-- HISTORY -->\
+        <section id="screen-history" style="display:none">\
+          <div style="display:flex;align-items:center;justify-content:center;margin-bottom:8px">\
+            <h1 class="app-title">History</h1>\
+          </div>\
+\
+          <div class="card" style="margin-bottom:12px">\
+            <div style="display:flex;align-items:center;justify-content:space-between">\
+              <div>\
+                <div style="font-size:12px;color:#8b93a8">Current Streak</div>\
+                <div style="font-size:28px;font-weight:800;color:#465b9f" id="miniStreak">0</div>\
+              </div>\
+              <div style="font-size:12px;color:var(--muted);text-align:right">Keep expressing your feelings daily!</div>\
+            </div>\
+          </div>\
+\
+          <div class="history-list" id="historyList">\
+            <!-- entries injected here -->\
+          </div>\
+        </section>\
+\
+        <!-- STREAK DETAILS -->\
+        <section id="screen-streak" style="display:none">\
+          <div style="display:flex;align-items:center;justify-content:center;margin-bottom:8px">\
+            <h1 class="app-title">Streak Details</h1>\
+          </div>\
+\
+          <div class="card streak-card">\
+            <div class="streak-big">\
+              <div style="font-size:13px;color:#8b93a8;margin-bottom:8px">Your Daily Streak</div>\
+              <div class="streak-number" id="bigStreak">0 Days</div>\
+              <div class="streak-sub">Every feeling is a step towards self-discovery. Keep going!</div>\
+            </div>\
+\
+            <div class="streak-actions">\
+              <button id="journalToday" class="btn" style="background:var(--button-bg)">Journal Today</button>\
+              <button id="viewHistory" class="btn-outline">View History</button>\
+            </div>\
+          </div>\
+        </section>\
+\
+        <div class="space"></div>\
+\
+        <!-- bottom nav -->\
+        <nav class="bottom-nav" role="tablist" aria-label="Main navigation">\
+          <div class="nav-item active" data-target="screen-journal" id="nav-journal">Journal</div>\
+          <div class="nav-item" data-target="screen-history" id="nav-history">History</div>\
+          <div class="nav-item" data-target="screen-streak" id="nav-streak">Streak</div>\
+        </nav>\
+\
+      </div>\
+    </div>\
+  </div>\
+\
+<script>\
+/* ---------- App logic (single-file) ---------- */\
+(function()\{\
+  // elements\
+  const welcome = document.getElementById('screen-welcome');\
+  const journal = document.getElementById('screen-journal');\
+  const history = document.getElementById('screen-history');\
+  const streak = document.getElementById('screen-streak');\
+\
+  const navItems = document.querySelectorAll('.nav-item');\
+  const nicknameInput = document.getElementById('nickname');\
+  const btnContinue = document.getElementById('btn-continue');\
+  const entryText = document.getElementById('entryText');\
+  const charCount = document.getElementById('charCount');\
+  const btnSave = document.getElementById('btn-save');\
+  const historyList = document.getElementById('historyList');\
+  const miniStreak = document.getElementById('miniStreak');\
+  const bigStreak = document.getElementById('bigStreak');\
+  const journalToday = document.getElementById('journalToday');\
+  const viewHistory = document.getElementById('viewHistory');\
+  const navJournal = document.getElementById('nav-journal');\
+\
+  // localStorage keys\
+  const LS_NICK = 'fs_nickname_v1';\
+  const LS_ENTRIES = 'fs_entries_v1';\
+\
+  // helpers\
+  function saveNickname()\{\
+    const v = nicknameInput.value.trim();\
+    if(v) localStorage.setItem(LS_NICK, v);\
+  \}\
+  function getNickname()\{ return localStorage.getItem(LS_NICK) || ''; \}\
+\
+  function loadEntries()\{\
+    try\{ return JSON.parse(localStorage.getItem(LS_ENTRIES) || '[]') \}catch(e)\{ return [] \}\
+  \}\
+  function saveEntries(arr)\{ localStorage.setItem(LS_ENTRIES, JSON.stringify(arr)); \}\
+\
+  // navigation\
+  function showScreen(target)\{\
+    [welcome,journal,history,streak].forEach(s=> s.style.display = 'none');\
+    document.getElementById(target).style.display = 'block';\
+\
+    // update bottom nav active state\
+    navItems.forEach(n => \{\
+      if(n.dataset.target === target) n.classList.add('active');\
+      else n.classList.remove('active');\
+    \});\
+  \}\
+\
+  // initial wiring for bottom nav (click)\
+  navItems.forEach(item=>\{\
+    item.addEventListener('click', ()=>\{\
+      const target = item.dataset.target;\
+      showScreen(target);\
+      if(target === 'screen-history') renderHistory();\
+      if(target === 'screen-streak') renderStreak();\
+    \});\
+  \});\
+\
+  // continue from welcome to journal\
+  btnContinue.addEventListener('click', ()=>\{\
+    const nick = nicknameInput.value.trim();\
+    if(!nick)\{\
+      nicknameInput.focus();\
+      return;\
+    \}\
+    saveNickname();\
+    // show journal\
+    showScreen('screen-journal');\
+  \});\
+\
+  // auto-fill nickname if present\
+  (function initNickname()\{\
+    const n = getNickname();\
+    if(n) \{\
+      nicknameInput.value = n;\
+      // if nickname exists, skip welcome and go to journal by default\
+      // but keep welcome accessible; we go to journal automatically\
+      showScreen('screen-journal');\
+    \} else \{\
+      showScreen('screen-welcome');\
+    \}\
+  \})();\
+\
+  // char counter\
+  entryText.addEventListener('input', ()=>\{\
+    charCount.textContent = `$\{entryText.value.length\}/500`;\
+    btnSave.disabled = entryText.value.trim().length === 0;\
+  \});\
+\
+  // save entry\
+  btnSave.addEventListener('click', ()=>\{\
+    const text = entryText.value.trim();\
+    if(!text) return;\
+    const entries = loadEntries();\
+    const now = new Date().toISOString();\
+    entries.unshift(\{ id:Date.now(), text, time: now \});\
+    saveEntries(entries);\
+    entryText.value = '';\
+    charCount.textContent = '0/500';\
+    // After save, show history\
+    renderHistory();\
+    showScreen('screen-history');\
+  \});\
+\
+  // render history\
+  function renderHistory()\{\
+    const entries = loadEntries();\
+    historyList.innerHTML = '';\
+    if(entries.length === 0)\{\
+      historyList.innerHTML = '<div class="muted" style="padding:12px">No entries yet \'97 write your first reflection.</div>';\
+      miniStreak.textContent = '0';\
+      return;\
+    \}\
+    entries.forEach(e=>\{\
+      const el = document.createElement('div');\
+      el.className = 'entry';\
+      const d = new Date(e.time);\
+      el.innerHTML = `<div class="meta">$\{d.toLocaleDateString(undefined,\{month:'long',day:'numeric',year:'numeric'\})\} \'95 $\{d.toLocaleTimeString([], \{hour:'2-digit', minute:'2-digit'\})\}</div>\
+                      <p>$\{escapeHtml(e.text)\}</p>`;\
+      historyList.appendChild(el);\
+    \});\
+    miniStreak.textContent = computeStreak();\
+  \}\
+\
+  // escape HTML\
+  function escapeHtml(s)\{\
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');\
+  \}\
+\
+  // streak calculation: consecutive days with at least one entry, counting from today\
+  function computeStreak()\{\
+    const arr = loadEntries();\
+    if(arr.length === 0) return 0;\
+    const today = new Date();\
+    // create a set of UTC days represented as yyyy-mm-dd\
+    const days = new Set(arr.map(e => \{\
+      const d = new Date(e.time);\
+      return d.getFullYear() + '-' + (d.getMonth()+1).toString().padStart(2,'0') + '-' + d.getDate().toString().padStart(2,'0');\
+    \}));\
+    let streak = 0;\
+    for(let i=0;;i++)\{\
+      const day = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);\
+      const key = day.getFullYear() + '-' + (day.getMonth()+1).toString().padStart(2,'0') + '-' + day.getDate().toString().padStart(2,'0');\
+      if(days.has(key)) streak++;\
+      else break;\
+    \}\
+    return streak;\
+  \}\
+\
+  function renderStreak()\{\
+    const s = computeStreak();\
+    bigStreak.textContent = `$\{s\} Days`;\
+    miniStreak.textContent = s;\
+  \}\
+\
+  // streak page quick actions\
+  journalToday.addEventListener('click', ()=>\{\
+    // switch to journal\
+    showScreen('screen-journal');\
+    navJournal.classList.add('active');\
+  \});\
+  viewHistory.addEventListener('click', ()=>\{\
+    renderHistory();\
+    showScreen('screen-history');\
+  \});\
+\
+  // On page load render history & streak if user already has data\
+  (function boot()\{\
+    renderHistory();\
+    renderStreak();\
+  \})();\
+\
+  // tiny accessibility: submit nick on Enter\
+  nicknameInput.addEventListener('keydown', (e)=>\{\
+    if(e.key === 'Enter') btnContinue.click();\
+  \});\
+\
+  // ensure save button disabled initially if empty\
+  btnSave.disabled = true;\
+\
+\})();\
+</script>\
+</body>\
+</html>\
+}
